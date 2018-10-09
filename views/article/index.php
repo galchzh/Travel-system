@@ -19,6 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         <?= Html::a('Create Article', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
+   
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -26,16 +27,27 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
+           // 'id',
             'title',
             'description',
             'body:ntext',
-            'author_id',
+            //'author_id',
+            [
+                'attribute'=>'author_id',
+                'value' => 'authors.name'
+            ],
            // 'status',
             [
                 'attribute'=>'status',
-                'value' => 'statuses.name'
+                'value' => 'statuses.name',
+                'visible' => Yii::$app->user->can('author'),
+            ], 
+            [
+                'attribute'=>'category_id',
+                'value' => 'categories.name',
+               
             ],
+         
             //'editor_id',
             //'category_id',
             //'created_at',
@@ -45,5 +57,10 @@ $this->params['breadcrumbs'][] = $this->title;
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
+        
+
+        
     ]);  ?>
+
+    
 </div>

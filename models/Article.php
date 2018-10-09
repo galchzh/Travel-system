@@ -3,7 +3,12 @@
 namespace app\models;
 
 use Yii;
-use hauntd\vote\behaviors\VoteBehavior;
+use dosamigos\taggable\Taggable;
+use yii\behaviors\BlameableBehavior;
+use yii\behaviors\TimestampBehavior;
+use yii\db\ActiveRecord;
+use yii\db\Expression;
+
 
 /**
  * This is the model class for table "article".
@@ -38,14 +43,24 @@ class Article extends \yii\db\ActiveRecord
     public function behaviors()
     {
         return [
-            VoteBehavior::class, // add VoteBehavior class to your model
+            'timestamp' => [
+                'class' => 'yii\behaviors\TimestampBehavior',
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_INSERT => ['created_at', 'updated_at'],
+                    ActiveRecord::EVENT_BEFORE_UPDATE => ['updated_at'],
+                    
+                ],
+                'value' => new Expression('NOW()'),
+            ],
+          'blameable' => [
+                'class' => BlameableBehavior::className(),
+                'createdByAttribute' => 'created_by',
+                'updatedByAttribute' => 'updated_by',
+            ],  
+            Taggable::className(),         
         ];
     }
 
-  /*  public static function find()
-    {
-        return new ItemQuery(get_called_class()); // override find() method
-    }*/
 
     /**
      * {@inheritdoc}
@@ -53,14 +68,31 @@ class Article extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['body'], 'string'],
-            [['rating_id','author_id', 'editor_id', 'category_id', 'created_at', 'updated_at', 'created_by', 'updated_by'], 'integer'],
+            [['body'], 'required'],
+            [['tagNames'],'safe'],
+            [['rating_id', 'author_id', 'editor_id', 'category_id'], 'integer'],
+            [['created_at', 'updated_at'], 'safe'],
             [['title', 'description','status'], 'string', 'max' => 255],
+        
             [['author_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['author_id' => 'id']],
             [['created_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['created_by' => 'id']],
             [['editor_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['editor_id' => 'id']],
             [['updated_by'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['updated_by' => 'id']],
         ];
+
+       
+    }
+
+    public function beforeSave($insert) {
+        if (parent::beforeSave($insert)) {
+            if (empty($this->status)){
+            $this->status=1;
+            }
+            return true;
+        }
+       
+        return false;
+        
     }
   
     /**
@@ -74,10 +106,10 @@ class Article extends \yii\db\ActiveRecord
             'description' => 'Description',
             'status' => 'Status',
             'body' => 'Body',
-            'rating_id' => 'Rating ID',
-            'author_id' => 'Author ID',
-            'editor_id' => 'Editor ID',
-            'category_id' => 'Category ID',
+            'rating_id' => 'Rating',
+            'author_id' => 'Author',
+            'editor_id' => 'Editor',
+            'category_id' => 'Category',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
             'created_by' => 'Created By',
@@ -88,9 +120,14 @@ class Article extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getAuthor()
+    public function getAuthors()
     {
         return $this->hasOne(User::className(), ['id' => 'author_id']);
+    }
+
+    public function getTags()
+    {
+        return $this->hasMany(Tag::className(), ['id' => 'tag_id'])->viaTable('article_tag_assn', ['article_id' => 'id']);
     }
 
     /**
@@ -106,10 +143,15 @@ class Article extends \yii\db\ActiveRecord
         return $this->hasOne(Status::className(), ['id' => 'status']);
     }
 
+    public function getCategories()
+    {
+        return $this->hasOne(Category::className(), ['id' => 'category_id']);
+    }
+
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getEditor()
+    public function getEditors()
     {
         return $this->hasOne(User::className(), ['id' => 'editor_id']);
     }

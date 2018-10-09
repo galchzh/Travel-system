@@ -1,5 +1,4 @@
 <?php
-
 /* @var $this \yii\web\View */
 /* @var $content string */
 
@@ -43,27 +42,43 @@ AppAsset::register($this);
             'class' => 'navbar navbar-default navbar-fixed-top',
         ],
     ]);
-?>
+  ?>
 
-    <div class="navbar-header">
+    <div class="navbar-header collapse navbar-collapse" id="myNavbar">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span> 
       </button>
-
+  <nav role="navigation">
+    <div id="menuToggle">
+    
+      <input type="checkbox" size:"lg"/>
+      <span></span>
+      <span></span>
+      <span></span>
+  
+      <ul class="collapse navbar-collapse" id="menu">
+      <li><i class="glyphicon glyphicon-home" ></i> <a href="../web/index.php"> Home</a></li>
+      <li><i class="glyphicon glyphicon-pencil" ></i><a href="../web/index.php#about"> About</a></li>
+      <li><i class="glyphicon glyphicon-headphones" ></i><a href="../web/index.php#services"> Values</a></li>
+      <li><i class="glyphicon glyphicon-thumbs-up" ></i><a href="../web/index.php#reviwes"> Reviews</a></li>  
+      </ul>
     </div>
+  </nav>
+</div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
-        <li><a href="../web/index.php">Home</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#services">Values</a></li>
-        <li><a href="#reviwes">Reviews</a></li>
-        <li><a href="#contact">Contact</a></li>
+        <li><a href="../web/index.php/site/about">About</a></li>
+        <li><a href="../web/index.php/site/contact">Contact</a></li>
+        <li><a href="../web/index.php/article">Articles</a></li>    
         <li><a href="../web/index.php/site/plan">Plan</a></li>
         <li><a href="../web/index.php/site/wonders">7 Wonders</a></li>
         <li><a href="../web/index.php/site/popular">3 Popular</a></li>
+    
       </ul>
+    
+  
 
     <?php   echo Nav::widget([
         'options' => ['class' => 'nav navbar-nav navbar-right '],
@@ -101,26 +116,26 @@ AppAsset::register($this);
     </div>
     
   <div class="jumbotron text-center">
-<h1>Travel System</h1> 
-		          		<fieldset>
-		<a href="login.php" class="btn btn-default btn-lg">
+  <h1>Travel System</h1> 
+                  <fieldset>
+    <a href="../web/index.php/site/login" class="btn btn-default btn-lg">
           <span class="glyphicon glyphicon-user"></span> Log in
         </a>
-		<a href="/user/create.php" class="btn btn-default btn-lg">
+    <a href="../web/index.php/user/create" class="btn btn-default btn-lg">
           <span class="glyphicon glyphicon-edit"></span> Registration
         </a>
 
       
-		</fieldset>
+    </fieldset>
 </div>
 <div id="about" class="container-fluid">
   <div class="row">
     <div class="col-sm-8">
-	<h2>About Our System</h2>
-	<h4>Our system support costumers references in diffrend kind of topics</h4> 
-	<p>Let us know about yours problems or concerns and we will take care of it in less then 24 hours.
-	We suggest a few ways of contact, availability and privacy service to our costumers</p>
-		<a href="#contact" class="btn btn-default btn-lg">
+  <h2>About Our System</h2>
+  <h4>Our system support costumers references in diffrend kind of topics</h4> 
+  <p>Let us know about yours problems or concerns and we will take care of it in less then 24 hours.
+  We suggest a few ways of contact, availability and privacy service to our costumers</p>
+    <a href="#contact" class="btn btn-default btn-lg">
           <span class="glyphicon glyphicon-envelope"></span> Get in Touch
         </a>
     </div>
@@ -129,49 +144,58 @@ AppAsset::register($this);
     </div>
   </div>
 </div>
-
-<div id="services" class="container-fluid text-center">
-  <h2>VALUES</h2>
-  <br>
-  <div class="row">
-
-    <div class="col-sm-4">
-      <span class="glyphicon glyphicon-phone logo-small"></span>
-      <h4>MOBILE </h4>
-      
-    </div>
-    <div class="col-sm-4">
-      <span class="glyphicon glyphicon-lock logo-small"></span>
-      <h4>PRIVACY</h4>
-    </div>
-	
-	<div class="col-sm-4">
-      <span class="glyphicon glyphicon-time logo-small"></span>
-      <h4>AVAILABILITY</h4>
-      
-    </div>
-   
-    <br><br>
-  <div class="row">
-    <div class="col-sm-4">
-      <span class="glyphicon glyphicon-leaf logo-small"></span>
-      <h4>GREEN</h4>
-
-    </div>
-    <div class="col-sm-4">
-      <span class="glyphicon glyphicon-usd logo-small"></span>
-      <h4>FREE</h4>
-
-    </div>
-    <div class="col-sm-4">
-      <span class="glyphicon glyphicon-ok logo-small"></span>
-      <h4>CUSTOMER SERVICE</h4>
-
-    </div>
-  </div>
+<div>
+  <section id="ht-kb-articles-widget-2" class="widget hkb_widget_articles" style="float:right;">
+    <h3 class="widget__title">Popular Articles</h3>
+    <ul>
+      <li class="hkb-widget-article__format-standard"><a class="hkb-widget__entry-title" href="https://demo.herothemes.com/knowall/knowledge-base/how-to-create-an-account/">How to Create an Account</a></li>
+      <li class="hkb-widget-article__format-standard"><a class="hkb-widget__entry-title" href="https://demo.herothemes.com/knowall/knowledge-base/how-does-the-30-day-money-back-guarantee-work/">How Does the 30 Day Money Back Guarantee Work?</a></li>
+      <li class="hkb-widget-article__format-standard"><a class="hkb-widget__entry-title" href="https://demo.herothemes.com/knowall/knowledge-base/how-our-pricing-plans-work/">How Our Pricing Plans Work</a></li>
+      <li class="hkb-widget-article__format-standard"><a class="hkb-widget__entry-title" href="https://demo.herothemes.com/knowall/knowledge-base/how-can-i-edit-my-already-existing-page/">How Can I Edit My Already Existing Page?</a></li>
+      <li class="hkb-widget-article__format-standard"><a class="hkb-widget__entry-title" href="https://demo.herothemes.com/knowall/knowledge-base/what-are-the-api-limits/">What Are the API Limits?</a></li></ul>
+  </section> 
 </div>
+
+<div id="services" class="container-fluid text-center" style="float:left;">
+  <h2>VALUES</h2>  
+  <div class="row">
+            <a href="../web/index.php/site/plan">
+                <div class="maintext" >
+                    <h2>Plan your Trip!</h2> 
+                    <p></p>
+                    <img class="mainphoto" src="../images/plan.jpeg">
+
+                </div>
+            </a>
+
+             <a href="../web/index.php/site/wonders">
+                <div class="maintext" >
+                    <h2>7 World Wonders</h2> 
+                    <p></p>
+                    <img class="mainphoto" src="../images/plan.jpeg">
+
+                </div>
+            </a>
+            <a href="../web/index.php/site/wonders">
+                <div class="maintext" >
+                    <h2>3 Popular Places</h2> 
+                    <p></p>
+                    <img class="mainphoto" src="../images/plan.jpeg">
+
+                </div>
+            </a>
+
+        </div>
+   </div>
+</div>
+</div>
+</div>
+
+<div>
+<div style:"padding:5px;">
 <div id="reviwes" class="container-fluid text-center">
-<h2>REVIEWS</h2>
+
+<h2 style:"margin-top:300px">REVIEWS</h2>
 
 <div id="myCarousel" class="carousel slide text-center container-fluid" data-ride="carousel">
   <!-- Indicators -->
@@ -182,7 +206,7 @@ AppAsset::register($this);
   </ol>
 
   <!-- Wrapper for slides -->
-  <div class="carousel-inner" role="listbox">
+  <div class="carousel-inner" role="listbox" style="background-color: #e0ebeb; border-radius: 25px;">
     <div class="item active">
     <h4>"This system is the best."<br><span style="font-style:normal;">David Cohen, Mechanical engineering student </span></h4>
     </div>
@@ -204,55 +228,7 @@ AppAsset::register($this);
     <span class="sr-only">Next</span>
   </a>
 </div>
-</div>
-
-<div id="contact" class="container-fluid bg-grey">
-  <h2 class="text-center">CONTACT</h2>
-  <div class="row">
-    <div class="col-sm-5">
-      <p>Contact us and we'll get back to you within 24 hours.</p>
-      <p><span class="glyphicon glyphicon-map-marker"></span> Jerusalem , Israel</p>
-      <p><span class="glyphicon glyphicon-phone"></span> +972 547858178</p>
-      <p><span class="glyphicon glyphicon-envelope"></span> sharingcaring@gmail.com</p>
-    </div>
-<section id="mainform" class="container">
-<form role="form"  id="reference" action="/finalProject/homePage.php" method="post">
-
-    <div class="col-sm-7">
-      <div class="row">
-        <div class="col-sm-6 form-group">
-          <input class="form-control requiredField" id="firstname" name="firstname" placeholder="Please enter first name" type="text" required="">
-        </div>
-		 <div class="col-sm-6 form-group">
-          <input class="form-control requiredField" id="lastname" name="lastname" placeholder="Please enter last name" type="text" required="" >
-        </div>
-        <div class="col-sm-6 form-group">
-          <input class="form-control requiredField" id="email" name="email" placeholder="Email" type="Please enter email" required="">
-        </div>
-		<div class="col-sm-6 form-group">
-          <input class="form-control requiredField" id="tel" name="tel" placeholder="Please enter Tel. number" type="text" required="" >
-        </div>
-		<div class="col-sm-6 form-group">
-          <input class="form-control requiredField" id="account" name="account" placeholder="Please enter account number" type="text" required="">
-
-        </div>
-   
       </div>
-      <textarea class="form-control requiredField" id="comments" name="comments" placeholder="Comment" rows="5"></textarea><br>
-      <div class="row">
-        <div class="col-sm-12 form-group">
-          <button  type="submit" class="btn btn-default pull-right" >Send</button>
-        </div>
-      </div>
-    </div>
-</form>
-        
-
-</section>	
-</div>
-</div>
-
-
 
 <?php $this->endBody() ?>
 </body>
@@ -286,3 +262,166 @@ $(document).ready(function(){
   });
 });
 </script>
+
+<style>
+.hkb-widget__entry-title
+{
+  color: #232323;
+}
+
+a:link, a:visited, a
+{
+  text-decoration: none;
+    
+  transition: color 0.3s ease;
+}
+#services
+{
+ width: 50%;
+ float:left;
+}
+.mainphoto{
+  border-radius: 50%;
+    width: 30%;
+    height: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+a:hover
+{
+  color: lightblue;
+}
+
+#menuToggle
+{
+  display: block;
+  position: absolute;
+  top: 15px;
+  left: 23px;
+  z-index: 1;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+#menuToggle input
+{
+  display: block;
+  width: 20px;
+  height:100px;
+  position: absolute;
+  top: -7px;
+  left: -5px;
+  cursor: pointer;
+  opacity: 0; /* hide this */
+  z-index: 2; /* and place it over the hamburger */
+  -webkit-touch-callout: none;
+}
+
+/*
+ * Just a quick hamburger
+ */
+#menuToggle span
+{
+  display: block;
+  width:33px;
+  height: 4px;
+  margin-bottom: 5px;
+  position: relative;
+  background: #cdcdcd;
+  border-radius: 3px;
+  
+  z-index: 1;
+  
+  transform-origin: 4px 0px;
+  
+  transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+              background 0.5s cubic-bezier(0.77,0.2,0.05,1.0),
+              opacity 0.55s ease;
+}
+
+#menuToggle span:first-child
+{
+  transform-origin: 0% 0%;
+}
+
+#menuToggle span:nth-last-child(2)
+{
+  transform-origin: 0% 100%;
+}
+
+/* 
+ * Transform all the slices of hamburger
+ * into a crossmark.
+ */
+#menuToggle input:checked ~ span
+{
+  opacity: 1;
+  transform: rotate(45deg) translate(-2px, -1px);
+  background: #232323;
+}
+
+/*
+ * But let's hide the middle one.
+ */
+#menuToggle input:checked ~ span:nth-last-child(3)
+{
+  opacity: 0;
+  transform: rotate(0deg) scale(0.2, 0.2);
+}
+
+/*
+ * Ohyeah and the last one should go the other direction
+ */
+#menuToggle input:checked ~ span:nth-last-child(2)
+{
+  transform: rotate(-45deg) translate(0, -1px);
+}
+
+/*
+ * Make this absolute positioned
+ * at the top left of the screen
+ */
+#menu
+{
+    position: absolute;
+    width: 200px;
+    margin: -100px 0 0 -50px;
+    padding: 0px 0px 0px 100px;
+    padding-top: 96px;
+    padding-left: 33px;
+    background: #48b7;
+    list-style-type: none;
+    -webkit-font-smoothing: antialiased;
+    transform-origin: 0% 0%;
+  transform: translate(-100%, 0);
+  
+  transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+}
+
+#menu li
+{
+  padding: 10px ;
+  font-size: 22px;
+}
+
+/*
+ * And let's slide it in from the left
+ */
+#menuToggle input:checked ~ ul
+{
+  transform: none;
+}
+.widget {
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    border-radius: 56px;
+    background: #48A7;
+    padding: 16px;
+    font-size: 14px;
+    line-height: 1.8;
+    margin: 23px -55px 0px 0px;
+}
+</style>

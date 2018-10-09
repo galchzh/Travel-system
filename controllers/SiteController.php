@@ -104,11 +104,27 @@ class SiteController extends Controller
      *
      * @return Response|string
      */
-    public function actionContact()
+    public function actionContactt()
     {
         $model = new ContactForm();
         if($model->load(Yii::$app->request->post())&& $model->save()) {
             Yii::$app->session->setFlash('contactFormSubmitted');
+            return $this->render('contact',[
+                'model' => $model,
+            ]);
+        } 
+        else
+        {
+            return $this->render('contact',['model' => $model,]);
+        }
+    }
+
+    public function actionContact()
+    {
+        $model = new Feedback();
+        if($model->load(Yii::$app->request->post())&& $model->save())
+        {
+            Yii::$app->session->setFlash('FeedSubmitted');
             return $this->render('contact',[
                 'model' => $model,
             ]);
@@ -181,6 +197,67 @@ class SiteController extends Controller
             'term' => $term
         ]);
     }
+
+    public function getToken($token)
+	{
+		$model=Users::model()->findByAttributes(array('token'=>$token));
+		if($model===null)
+			throw new CHttpException(404,'The requested page does not exist.');
+		return $model;
+	}
+        
+
+        public function actionVerToken($token)
+        {
+            $model=$this->getToken($token);
+            if(isset($_POST['Ganti']))
+            {
+                if($model->token==$_POST['Ganti']['tokenhid']){
+                    $model->password=md5($_POST['Ganti']['password']);
+                    $model->token="null";
+                    $model->save();
+                    Yii::app()->user->setFlash('ganti','<b>Password has been successfully changed! please login</b>');
+                    $this->redirect('?r=site/login');
+                    $this->refresh();
+                }
+            }
+            $this->render('verifikasi',array(
+			'model'=>$model,
+		));
+        }
+
+        
+        public function actionForgot()
+	{
+            $getEmail=$_POST['Lupa']['email'];
+            $getModel= Users::model()->findByAttributes(array('email'=>$getEmail));
+            if(isset($_POST['Lupa']))
+            {
+                $getToken=rand(0, 99999);
+                $getTime=date("H:i:s");
+                $getModel->token=md5($getToken.$getTime);
+                $namaPengirim="Owner Jsource Indonesia";
+                $emailadmin="fahmi.j@programmer.net";
+                $subjek="Reset Password";
+                $setpesan="you have successfully reset your password<br/>
+                    <a href='http://yourdomain.com/index.php?r=site/vertoken/view&token=".$getModel->token."'>Click Here to Reset Password</a>";
+                if($getModel->validate())
+			{
+				$name='=?UTF-8?B?'.base64_encode($namaPengirim).'?=';
+				$subject='=?UTF-8?B?'.base64_encode($subjek).'?=';
+				$headers="From: $name <{$emailadmin}>\r\n".
+					"Reply-To: {$emailadmin}\r\n".
+					"MIME-Version: 1.0\r\n".
+					"Content-type: text/html; charset=UTF-8";
+				$getModel->save();
+                                Yii::app()->user->setFlash('forgot','link to reset your password has been sent to your email');
+				mail($getEmail,$subject,$setpesan,$headers);
+				$this->refresh();
+			}
+                
+            }
+		$this->render('forgot');
+	}
 
 
 

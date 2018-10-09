@@ -8,6 +8,11 @@ use app\models\ArticleSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\behaviors\BlameableBehavior;
+use yii\behaviors\TimestampBehavior;
+use yii\filters\AccessControl;
+use yii\data\ActiveDataProvider;
+
 
 /**
  * ArticleController implements the CRUD actions for Article model.
@@ -20,11 +25,36 @@ class ArticleController extends Controller
     public function behaviors()
     {
         return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['create', 'update'],
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'actions' => ['create'],
+                        'roles' => ['createArticle'],
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['update'],
+                        'roles' => ['updateArticle'],
+                        'roleParams' => function() {
+                            return ['article' => Article::findOne(['id' => Yii::$app->request->get('id')])];
+                        },                      
+                    ],                   
+                ],
+            ],
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
                 ],
+            ],
+            [
+                'class' => BlameableBehavior::className()
+            ],
+            [
+                'class' =>  TimestampBehavior::className(),
             ],
         ];
     }
@@ -37,12 +67,26 @@ class ArticleController extends Controller
     {
         $searchModel = new ArticleSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+      
+        
+        if (\Yii::$app->user->can('editor')) {
+        $dataProvider->setSort([
+            'defaultOrder' => [ 'status' => SORT_ASC],   
+       ]);
+        }
+       else if (\Yii::$app->user->can('author')) {
+        $dataProvider->setSort([
+        'defaultOrder' => [ 'status' => SORT_DESC],
+        ]);
+        }
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }
+
+  
 
     /**
      * Displays a single Article model.

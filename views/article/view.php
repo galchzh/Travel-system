@@ -1,3 +1,5 @@
+
+
 <?php
 
 use yii\helpers\Html;
@@ -9,6 +11,7 @@ use kartik\social\FacebookPlugin;
 use kartik\social\TwitterPlugin;
 use yii\widgets\ActiveForm;
 use app\models\Rating;
+use app\models\Status;
 use kartik\rating\StarRating;
 use yii\web\JsExpression;
 
@@ -47,30 +50,48 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value' => $model->statuses->name
             ],
             'body:ntext',
-            'author_id',
-            'editor_id',
-            'category_id',
+            //'author_id',
+           [                      
+                'label' => 'Author',
+				'format' => 'html',
+				'value' => Html::a($model->authors->name, 
+					['user/view', 'id' => $model->authors->id]),                
+            ],
+           // 'editor_id',
+           [                      
+            'label' => 'Editor',
+            'format' => 'html',
+            'value' => Html::a($model->editors->name, 
+                ['user/view', 'id' => $model->editors->id]),                
+            ],
+            [
+                'label' => 'Category',
+                'value' => $model->categories->name
+            ],
+            //'category_id',
             'created_at',
             'updated_at',
-            'created_by',
-            'updated_by',
+            //'created_by',
+            [
+                'label' => 'Created By',
+                'value' => $model->createdBy->name
+            ],
+            [
+                'label' => 'Updated By',
+                'value' => $model->updatedBy->name
+            ],
+           // 'updated_by',
         ],
     ]) ?>
 
-    <?php
-    
-       $form = ActiveForm::begin(); 
-        echo $form->field($model, 'rating_id')->widget(StarRating::classname(), [
-            'pluginOptions' => ['size'=>'lg', 'starCaptions' => new JsExpression("function(val){return val == 1 ? 'One heart' : val + ' hearts';}")]
-        ]);
-
-?>
-      
-    <div class="form-group">
-    <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+    <!-- <p> if you want to rate this article please click here:</p><br> 
+    <a href="../web/index.php/rating/create?u=<?php// echo $_SESSION[$model->id] ?>"> click me</a></p>
+       -->
+    <!-- <div class="form-group">
+    <?php // Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
 </div>
 
-<?php ActiveForm::end(); ?>
+<?php// ActiveForm::end(); ?> -->
   
 
    

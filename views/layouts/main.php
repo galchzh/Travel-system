@@ -44,6 +44,7 @@ AppAsset::register($this);
             ['label' => 'Home', 'url' => ['../index.php']],           
             ['label' => 'About', 'url' => ['../index.php/site/about']],
             ['label' => 'Contact', 'url' => ['../index.php/site/contact']],
+            ['label' => 'Articles', 'url' => ['../index.php/article/']],
             ['label' => 'Plan', 'url' => ['../index.php/site/plan']],
             ['label' => '7 Wonders', 'url' => ['../index.php/site/wonders']],
             ['label' => '3 Popular', 'url' => ['../index.php/site/popular']],
@@ -53,7 +54,7 @@ AppAsset::register($this);
         'options' => ['class' => 'nav navbar-nav navbar-right '],
         'items' => [
             Yii::$app->user->isGuest ? (
-                Html::a('<i class="fa fa-fw fa-user  "></i> Sign Up',['/user/create'], ['class' => 'btn btn-black', 'title' => 'Sign Up'])
+                Html::a('<i class="glyphicon glyphicon-user"></i> Sign Up',['/user/create'], ['class' => 'btn btn-black', 'title' => 'Sign Up'])
             ):(
                 ['label' => '', 'url' => ['/site']] 
             )
@@ -63,13 +64,13 @@ AppAsset::register($this);
         'options' => ['class' => 'nav navbar-nav navbar-right fixed'],
         'items' =>[
             Yii::$app->user->isGuest ? (
-                Html::a('<i class="glyphicon glyphicon-log-in  "></i> login',['site/login'], ['class' => 'btn btn-black', 'title' => 'login'])
+                Html::a('<i class="glyphicon glyphicon-log-in"></i> login',['site/login'], ['class' => 'btn btn-black', 'title' => 'login'])
             ) : (
             
             '<li>'
             . Html::beginForm(['/site/logout'], 'post')
             . Html::submitButton(
-                '<i class="glyphicon glyphicon-log-out  "></i> Logout (' . Yii::$app->user->identity->username . ')',
+                '<i class="glyphicon glyphicon-log-out"></i> Logout (' . Yii::$app->user->identity->username . ')',
                 ['class' => 'btn btn-black btn-link logout']
             )
             . Html::endForm()
@@ -92,13 +93,7 @@ AppAsset::register($this);
     </div>
 </div>
 
-<footer class="footer">
-    <div class="container">
-        <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
 
-        <p class="pull-right"><?= Yii::powered() ?></p>
-    </div>
-</footer>
 
 <?php $this->endBody() ?>
 </body>

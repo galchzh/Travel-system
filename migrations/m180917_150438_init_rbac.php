@@ -13,19 +13,30 @@ class m180917_150438_init_rbac extends Migration
     public function safeUp()
     {
         $auth = Yii::$app->authManager;
+
         $author = $auth->createRole('author');
         $auth->add($author);
+
+        $editor = $auth->createRole('editor');
+        $auth->add($editor);
   
         $admin = $auth->createRole('admin');
         $auth->add($admin);
                 
-        $auth->addChild($admin, $author);
+        $auth->addChild($admin, $editor);
+        $auth->addChild($editor, $author);
   
         $manageUsers = $auth->createPermission('manageUsers');
         $auth->add($manageUsers);
+
+        $createArticle = $auth->createPermission('createArticle');
+        $auth->add($createArticle); 
   
         $updateArticle = $auth->createPermission('updateArticle');
-        $auth->add($updateArticle);                    
+        $auth->add($updateArticle);  
+        
+        $updateStatus = $auth->createPermission('updateStatus');
+        $auth->add($updateStatus);
                 
         $updateOwnArticle = $auth->createPermission('updateOwnArticle');
   
@@ -37,8 +48,12 @@ class m180917_150438_init_rbac extends Migration
                                   
                 
         $auth->addChild($admin, $manageUsers);
-        $auth->addChild($updateOwnArticle, $updateArticle);
+        $auth->addChild($author, $createArticle);
+        $auth->addChild($editor, $updateStatus);
+        $auth->addChild($editor, $updateArticle);
         $auth->addChild($author, $updateOwnArticle); 
+        $auth->addChild($updateOwnArticle, $updateArticle);
+       
     }
 
     /**
