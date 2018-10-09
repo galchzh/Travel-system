@@ -369,8 +369,8 @@ $this->title = '3 World popular places';
 #hh4 {
   color: #111;
   position: absolute;
-  top: 30%;
-  left: 30%;
+  top: 40%;
+  left: 26%;
   letter-spacing: 2px;
 }
 
