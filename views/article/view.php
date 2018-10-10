@@ -1,19 +1,20 @@
-
-
 <?php
-
+namespace app\models;
+use yii;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
-// use hauntd\vote\behaviors\VoteBehavior;
-// use kartik\social\Disqus;
 use yii\helpers\Url;
 use kartik\social\FacebookPlugin;
 use kartik\social\TwitterPlugin;
 use yii\widgets\ActiveForm;
+use yii\helpers\ArrayHelper;
 use app\models\Rating;
-use app\models\Status;
 use kartik\rating\StarRating;
 use yii\web\JsExpression;
+use app\models\User;
+use app\models\Tag;
+
+
 
 
 
@@ -21,14 +22,19 @@ use yii\web\JsExpression;
 /* @var $model app\models\Article */
 
 $this->title = $model->title;
-$this->params['breadcrumbs'][] = ['label' => 'Articles', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Articles','url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
-?>
-<div class="article-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+?>
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+       
+<div class="article-view">
+    
 
     <p>
+        <?php  if (\Yii::$app->user->can('author')): ?>
         <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Delete', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
@@ -37,61 +43,188 @@ $this->params['breadcrumbs'][] = $this->title;
                 'method' => 'post',
             ],
         ]) ?>
+         <?php endif; ?>
     </p>
+   
 
-    <?= DetailView::widget([
+    <div class="row">
+    <div class="col-lg-10">&nbsp;</div>
+    <div class="col-lg-10">
+        <div class="panel panel-default" style="float:right;padding: 18px 0px 100px 15px;
+                     margin: 5px ;">
+          
+            <div class="panel-body">
+                <h1> <?=$model->title?></h1>
+               
+ 
+                <p>Created At: <?=$model->created_at?></p>
+                <p style="color:gray"> <?=$model->description?></p>
+                <br>
+                <br>
+                <p style="margin: 5px 18px 9px; padding:8px; font-size: 14px; line-height: 1.8;"> <?=$model->body?></p>
+                
+                <p class="author">Created By: -<?=$model->createdBy->name?>-</p>
+<br><br>
+                
+
+    <div class="detail-disposal">
+                    <?= DetailView::widget([
         'model' => $model,
+        'options' => ['class' => 'detail1-view tags'],    
         'attributes' => [
-            'id',
-            'title',
-            'description',
             [
-                'label' => 'Status',
-                'value' => $model->statuses->name
+                'label' => 'Tags',
+                'format' => 'html',
+                'value' => $tags
             ],
-            'body:ntext',
-            //'author_id',
-           [                      
-                'label' => 'Author',
-				'format' => 'html',
-				'value' => Html::a($model->authors->name, 
-					['user/view', 'id' => $model->authors->id]),                
-            ],
-           // 'editor_id',
-           [                      
-            'label' => 'Editor',
-            'format' => 'html',
-            'value' => Html::a($model->editors->name, 
-                ['user/view', 'id' => $model->editors->id]),                
-            ],
-            [
-                'label' => 'Category',
-                'value' => $model->categories->name
-            ],
-            //'category_id',
-            'created_at',
-            'updated_at',
-            //'created_by',
-            [
-                'label' => 'Created By',
-                'value' => $model->createdBy->name
-            ],
-            [
-                'label' => 'Updated By',
-                'value' => $model->updatedBy->name
-            ],
-           // 'updated_by',
+           
         ],
     ]) ?>
+     <?= DetailView::widget([
+        'model' => $model,
+        'options' => ['class' => 'detail1-view'],    
+        'attributes' => [
+            [
+                'label' => 'Category',
+                'format' => 'html',
+                'value' => Html::a($model->categories->name, 
+					['category/view', 'id' => $model->categories->id]),
+            ],  
+        ],
+    ]) ?>
+              
+            </div>
+        </div>
+      
+        <?php if(!(Yii::$app->session->hasFlash('RateSubmitted'))): ?>
+        <div style=" margin: auto;  width: 45%; padding-left: 100px;">
+        <?php $form = ActiveForm::begin(); ?>
+        <?php $model->rate = 0;?>
+        <?php echo $form->field($model, 'rate')->widget(StarRating::classname(), [
+                'pluginOptions' => ['size'=>'lg', 'showCaption' => true,  'showClear' => false,]
+                     ]); ?>
 
-    <!-- <p> if you want to rate this article please click here:</p><br> 
-    <a href="../web/index.php/rating/create?u=<?php// echo $_SESSION[$model->id] ?>"> click me</a></p>
-       -->
-    <!-- <div class="form-group">
-    <?php // Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+                     
+
+            <div class="form-group">
+            <?= Html::submitButton('<i class="glyphicon glyphicon-send")></i> Save', ['class' => 'btn btn-primary', 'style' => 'margin-left:25%;']) ?>
+            </div>
+            </div>
+        <?php ActiveForm::end(); ?>
+        
+        <?php else : ?>
+            
+        <div style=" margin: auto;  width: 55%; padding: 10px;">
+        <div class="alert alert-info" role="alert" style="text-align:center; width: 80%; margin-left:10%;">
+                Thank you for rating this article with <?= $model->rate?>  
+                <?php if ($model->rate == 0.5) :?> star.. We will improve next time!<br>
+                <i class="glyphicon glyphicon-star font half" ></i>
+                <?php elseif ($model->rate == 1) :?> star.. We will improve next time!<br>
+                <i class="glyphicon glyphicon-star font" ></i>
+                <?php elseif ($model->rate == 1.5) :?> stars.. We will improve next time!<br>
+                <i class="glyphicon glyphicon-star font" ></i>
+                <i class="glyphicon glyphicon-star font half" ></i>
+                <?php elseif ($model->rate == 2) :?> stars.. We will improve next time!<br>
+                <i class="glyphicon glyphicon-star font" ></i>
+                <i class="glyphicon glyphicon-star font" ></i>
+                <?php elseif ($model->rate == 2.5) :?> stars.. We will improve next time!<br>
+                <i class="glyphicon glyphicon-star font" ></i>
+                <i class="glyphicon glyphicon-star font" ></i>
+                <i class="glyphicon glyphicon-star font half" ></i>
+                <?php elseif ($model->rate == 3) :?> stars! Hope to see you again!<br>
+                <i class="glyphicon glyphicon-star font" ></i>
+                <i class="glyphicon glyphicon-star font" ></i>
+                <i class="glyphicon glyphicon-star font" ></i>
+                <?php elseif ($model->rate == 3.5) :?> stars! Hope to see you again!<br>
+                <i class="glyphicon glyphicon-star font" ></i>
+                <i class="glyphicon glyphicon-star font" ></i>
+                <i class="glyphicon glyphicon-star font" ></i>
+                <i class="glyphicon glyphicon-star font half" ></i>
+                <?php elseif ($model->rate == 4) :?> stars! Hope to see you again!<br>
+                <i class="glyphicon glyphicon-star font" ></i>
+                <i class="glyphicon glyphicon-star font" ></i>
+                <i class="glyphicon glyphicon-star font" ></i>
+                <i class="glyphicon glyphicon-star font" ></i>
+                <?php elseif ($model->rate == 4.5) :?> stars! Hope to see you again!<br>
+                <i class="glyphicon glyphicon-star font" ></i>
+                <i class="glyphicon glyphicon-star font" ></i>
+                <i class="glyphicon glyphicon-star font" ></i>
+                <i class="glyphicon glyphicon-star font" ></i>
+                <i class="glyphicon glyphicon-star font half" ></i>
+                <?php elseif ($model->rate == 5) :?> stars! Hope to see you again!<br>
+                <i class="glyphicon glyphicon-star font" ></i>
+                <i class="glyphicon glyphicon-star font" ></i>
+                <i class="glyphicon glyphicon-star font" ></i>
+                <i class="glyphicon glyphicon-star font" ></i>
+                <i class="glyphicon glyphicon-star font" ></i>
+        <?php endif;?>
+        </div>
+        </div>
+       
+        <?php endif;?>
+ 
+        
+    </div>
 </div>
 
-<?php// ActiveForm::end(); ?> -->
+
+  <style>
+ .half {
+    position:relative;
+}
+.font{
+    font-size:1.25em;
+}
+.half:before {
+
+      content: "\e006"; /* put here default icon code*/
+      width: 47%;
+      display: block;
+      position: absolute;
+      overflow: hidden;
+
+}
+.half:after {
+    content: "\e007"; /* put here icon-empty code*/
+}
+
+.half-heart:before {
+
+      content: "\e005"; /* put here default icon code*/
+      width: 57%;
+      display: block;
+      position: absolute;
+      overflow: hidden;
+
+}
+.half-heart:after {
+    content: "\e143"; /* put here icon-empty code*/
+}
+      .author
+      {
+        margin: 60px 0px 0px 700px;
+      }
+
+      .detail-disposal
+      {
+        position:relative;
+        width:100%;
+      }
+.detail1-view {
+    margin-left:20px;
+    margin-bottom:20px;
+    float:left;
+    width: 300px;  
+    }
+.tags
+{
+    padding:10px;
+}
+      </style>
+
+   
+    
+
   
 
    
@@ -113,21 +246,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
 ?>
   
-<?php 
-// \hauntd\vote\widgets\Vote::widget([
-//   'entity' => 'itemVote',
-//   'model' => $model,
-//   'options' => ['class' => 'vote  vote-visible-buttons']
-// ]);
 
-//  \hauntd\vote\widgets\Favorite::widget([
-//     'entity' => 'itemFavorite',
-//     'model' => $model,
-// ]);
-
-//  \hauntd\vote\widgets\Like::widget([
-//     'entity' => 'itemLike',
-//     'model' => $model,
-// ]); ?>
 
 </div>

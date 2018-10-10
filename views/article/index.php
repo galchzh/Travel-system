@@ -26,7 +26,6 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
            // 'id',
             'title',
             'description',
@@ -47,6 +46,11 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value' => 'categories.name',
                
             ],
+            [
+                'label' => 'Rate',
+                'value' => 'average',
+                'contentOptions' => ['style' => 'text-align:center;'],
+            ],
          
             //'editor_id',
             //'category_id',
@@ -61,6 +65,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
         
     ]);  ?>
+
+
 
     
 </div>

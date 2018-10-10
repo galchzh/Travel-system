@@ -17,7 +17,6 @@ class m181007_182846_create_article_table extends Migration
            'title' => $this->string(),
            'description' => $this->string(),
            'status' => $this->integer(),
-           'rating_id' => $this->integer(),
            'body' => $this->text(),
            'author_id' => $this->integer(),
            'editor_id' => $this->integer(),
@@ -26,6 +25,9 @@ class m181007_182846_create_article_table extends Migration
            'updated_at' => $this->integer(),
            'created_by' => $this->integer(),
            'updated_by' => $this->integer(),
+           'rate' => $this->double(),
+           'sum' => $this->double(),
+           'count' => $this->integer(),
        ]);
 
 

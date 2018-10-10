@@ -104,20 +104,6 @@ class SiteController extends Controller
      *
      * @return Response|string
      */
-    public function actionContactt()
-    {
-        $model = new ContactForm();
-        if($model->load(Yii::$app->request->post())&& $model->save()) {
-            Yii::$app->session->setFlash('contactFormSubmitted');
-            return $this->render('contact',[
-                'model' => $model,
-            ]);
-        } 
-        else
-        {
-            return $this->render('contact',['model' => $model,]);
-        }
-    }
 
     public function actionContact()
     {
@@ -158,36 +144,6 @@ class SiteController extends Controller
         return $this->render('popular');
     }
 
-    public function actionFeedback()
-    {
-        $model = new Feedback();
-        if($model->load(Yii::$app->request->post())&& $model->save())
-        {
-            Yii::$app->session->setFlash('FeedSubmitted');
-            return $this->render('feedback',[
-                'model' => $model,
-            ]);
-        } 
-        else
-        {
-            return $this->render('feedback',['model' => $model,]);
-        }
-    }
-    public function actionFeedbackk()
-    {
-        $model = new Feedback();
-        if($model->load(Yii::$app->request->post())&& $model->save())
-        {
-            Yii::$app->session->setFlash('FeedSubmitted');
-            return $this->render('feedbackk',[
-                'model' => $model,
-            ]);
-        } 
-        else
-        {
-            return $this->render('feedbackk',['model' => $model,]);
-        }
-    }
     public function actionSearcharticle()
     {
         $term =  $_GET['searchterm']   ;

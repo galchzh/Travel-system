@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use Yii;
 use app\models\Article;
+use yii\helpers\Html;
 use app\models\ArticleSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -96,8 +97,30 @@ class ArticleController extends Controller
      */
     public function actionView($id)
     {
+        $model = $this->findModel($id);
+        $tagModels = $model->tags;
+
+        $model->count = $model->count+1;
+        if ($model->load(Yii::$app->request->post()) && $model->save(false)) {
+            Yii::$app->session->setFlash('RateSubmitted');
+           $model->sum = $model->sum+$model->rate;
+           $model->save(false);
+           return $this->redirect(['view','id' => $model->id]);
+        }
+
+        $tags = '';
+        foreach($tagModels as $tag)
+        {
+            $tagLink = Html::a($tag->name, ['article/index', 'ArticleSearch[tag]' => $tag->name] );
+            $tags .= ','.$tagLink;
+        }  
+
+        $tags = substr($tags,1);  
+
         return $this->render('view', [
             'model' => $this->findModel($id),
+            'tags' => $tags
+        
         ]);
     }
 
@@ -177,7 +200,8 @@ class ArticleController extends Controller
             'term' => $term
         ]);
     }
-    
+
+   
 
     
 

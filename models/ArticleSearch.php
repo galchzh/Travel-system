@@ -97,13 +97,13 @@ class ArticleSearch extends Article
         {
            $condition = Tag::find()
                     ->select('id')
-                    ->where(['IN', 'name', $this->globalSearch]);
+                    ->where(['IN', 'name', $this->tag]);
             $query->joinWith('tags');
             $query->andWhere(['IN', 'tag_id', $condition]);
 
         }
 
-
+   
         return $dataProvider;
     }
 }

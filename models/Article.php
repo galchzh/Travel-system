@@ -10,6 +10,7 @@ use yii\db\ActiveRecord;
 use yii\db\Expression;
 
 
+
 /**
  * This is the model class for table "article".
  *
@@ -70,7 +71,8 @@ class Article extends \yii\db\ActiveRecord
         return [
             [['body'], 'required'],
             [['tagNames'],'safe'],
-            [['rating_id', 'author_id', 'editor_id', 'category_id'], 'integer'],
+            [['rate','sum'],'double'],
+            [['rating_id', 'author_id', 'editor_id', 'category_id', 'count'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
             [['title', 'description','status'], 'string', 'max' => 255],
         
@@ -90,6 +92,7 @@ class Article extends \yii\db\ActiveRecord
             }
             return true;
         }
+        
        
         return false;
         
@@ -106,7 +109,6 @@ class Article extends \yii\db\ActiveRecord
             'description' => 'Description',
             'status' => 'Status',
             'body' => 'Body',
-            'rating_id' => 'Rating',
             'author_id' => 'Author',
             'editor_id' => 'Editor',
             'category_id' => 'Category',
@@ -114,6 +116,9 @@ class Article extends \yii\db\ActiveRecord
             'updated_at' => 'Updated At',
             'created_by' => 'Created By',
             'updated_by' => 'Updated By',
+            'rate' => 'Rate',
+            'sum' => 'Sum',
+            'count' => 'Count',
         ];
     }
 
@@ -163,5 +168,16 @@ class Article extends \yii\db\ActiveRecord
     {
         return $this->hasOne(User::className(), ['id' => 'updated_by']);
     }
+
+    public function getAverage()
+    {   
+        if($this->count != 0) 
+        {
+            return $average = number_format($this->sum/$this->count,1);
+        }
+        return 0;
+    }
+
+
 }
 

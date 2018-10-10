@@ -30,13 +30,14 @@ AppAsset::register($this);
     <?php $this->head() ?>
 </head>
 
+<?php $this->title = 'Home'; ?>
+
 <body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
 <?php $this->beginBody() ?>
 
 <div class="">
     <?php
     NavBar::begin([
-        'brandLabel' => Yii::$app->name,
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar navbar-default navbar-fixed-top',
@@ -61,7 +62,7 @@ AppAsset::register($this);
       <ul class="collapse navbar-collapse" id="menu">
       <li><i class="glyphicon glyphicon-home" ></i> <a href="../web/index.php"> Home</a></li>
       <li><i class="glyphicon glyphicon-pencil" ></i><a href="../web/index.php#about"> About</a></li>
-      <li><i class="glyphicon glyphicon-headphones" ></i><a href="../web/index.php#services"> Values</a></li>
+      <li><i class="glyphicon glyphicon-heart" ></i><a href="../web/index.php#try"> Popular & Recommended</a></li>
       <li><i class="glyphicon glyphicon-thumbs-up" ></i><a href="../web/index.php#reviwes"> Reviews</a></li>  
       </ul>
     </div>
@@ -135,7 +136,7 @@ AppAsset::register($this);
   <h4>Our system support costumers references in diffrend kind of topics</h4> 
   <p>Let us know about yours problems or concerns and we will take care of it in less then 24 hours.
   We suggest a few ways of contact, availability and privacy service to our costumers</p>
-    <a href="#contact" class="btn btn-default btn-lg">
+    <a href="#contact" class="btn btn-default btn-lg" id="try">
           <span class="glyphicon glyphicon-envelope"></span> Get in Touch
         </a>
     </div>
@@ -145,8 +146,9 @@ AppAsset::register($this);
   </div>
 </div>
 <div>
+  <div id="popular">
   <section id="ht-kb-articles-widget-2" class="widget hkb_widget_articles" style="float:right;">
-    <h3 class="widget__title">Popular Articles</h3>
+    <h3 class="widget__title" style="margin:5%; margin-top:-2px; color:black;">Popular Articles</h3>
     <ul>
       <li class="hkb-widget-article__format-standard"><a class="hkb-widget__entry-title" href="https://demo.herothemes.com/knowall/knowledge-base/how-to-create-an-account/">How to Create an Account</a></li>
       <li class="hkb-widget-article__format-standard"><a class="hkb-widget__entry-title" href="https://demo.herothemes.com/knowall/knowledge-base/how-does-the-30-day-money-back-guarantee-work/">How Does the 30 Day Money Back Guarantee Work?</a></li>
@@ -154,37 +156,46 @@ AppAsset::register($this);
       <li class="hkb-widget-article__format-standard"><a class="hkb-widget__entry-title" href="https://demo.herothemes.com/knowall/knowledge-base/how-can-i-edit-my-already-existing-page/">How Can I Edit My Already Existing Page?</a></li>
       <li class="hkb-widget-article__format-standard"><a class="hkb-widget__entry-title" href="https://demo.herothemes.com/knowall/knowledge-base/what-are-the-api-limits/">What Are the API Limits?</a></li></ul>
   </section> 
+      </div>
 </div>
-
-<div id="services" class="container-fluid text-center" style="float:left;">
-  <h2>VALUES</h2>  
+<div style:"padding:5px;">
+<div id="recommended"  style="float:left; text-align:center; border-radius: 56px;
+    background: #c5deec;
+    padding: 10px;
+    line-height: 1.8;">
+  <h2 style="color:black">Recommended Articles</h2>  
   <div class="row">
+          <div class="child child1">
             <a href="../web/index.php/site/plan">
                 <div class="maintext" >
-                    <h2>Plan your Trip!</h2> 
+                    <h2>Start planning your Trip!</h2> 
                     <p></p>
-                    <img class="mainphoto" src="../images/plan.jpeg">
+                    <img class="mainphoto" src="../images/plan.gif">
 
                 </div>
             </a>
-
+          </div>
+          <div class="child child2">
              <a href="../web/index.php/site/wonders">
                 <div class="maintext" >
                     <h2>7 World Wonders</h2> 
                     <p></p>
-                    <img class="mainphoto" src="../images/plan.jpeg">
+                    <img class="mainphoto" src="../images/globe.gif">
 
                 </div>
             </a>
-            <a href="../web/index.php/site/wonders">
+            </div>
+          <div class="child child3">
+            <a href="../web/index.php/site/popular">
                 <div class="maintext" >
                     <h2>3 Popular Places</h2> 
                     <p></p>
-                    <img class="mainphoto" src="../images/plan.jpeg">
+                    <img class="mainphoto" src="../images/walk.gif">
 
                 </div>
             </a>
-
+            </div>
+          
         </div>
    </div>
 </div>
@@ -195,7 +206,7 @@ AppAsset::register($this);
 <div style:"padding:5px;">
 <div id="reviwes" class="container-fluid text-center">
 
-<h2 style:"margin-top:300px">REVIEWS</h2>
+<h2 style:"margin-top:300px; margin-buttom:-30%;">Reviews</h2>
 
 <div id="myCarousel" class="carousel slide text-center container-fluid" data-ride="carousel">
   <!-- Indicators -->
@@ -206,7 +217,7 @@ AppAsset::register($this);
   </ol>
 
   <!-- Wrapper for slides -->
-  <div class="carousel-inner" role="listbox" style="background-color: #e0ebeb; border-radius: 25px;">
+  <div class="carousel-inner" role="listbox" style="background-color: #c5deec; border-radius: 25px;">
     <div class="item active">
     <h4>"This system is the best."<br><span style="font-style:normal;">David Cohen, Mechanical engineering student </span></h4>
     </div>
@@ -264,6 +275,49 @@ $(document).ready(function(){
 </script>
 
 <style>
+.row {
+    width: 100%; /* Try setting this to 400px or something */
+    display: table;
+    text-align:center;
+   
+}
+.child{
+  display: table-cell;
+  box-sizing: border-box;
+
+}
+ .child1 {
+    width: 40%;
+    height: auto;
+    padding-left:-10px;
+}
+
+.child2 {
+  width: 20%;
+    height: auto;
+}
+.child3 {
+    width: 33%;
+    height: auto;
+} 
+.mainphoto{
+  border-radius: 50%;
+    width: 60%;
+    height: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.maintext {
+    text-align: center;
+    width:100%;
+
+    /* Decorative .. */
+    /* min-height: 40px; */
+}
+.child:first-child .maintext {
+    margin-left: -10;
+}
 .hkb-widget__entry-title
 {
   color: #232323;
@@ -272,26 +326,19 @@ $(document).ready(function(){
 a:link, a:visited, a
 {
   text-decoration: none;
+   color: #232323;
     
   transition: color 0.3s ease;
 }
-#services
+#recommended
 {
- width: 50%;
+ width: 55%;
  float:left;
-}
-.mainphoto{
-  border-radius: 50%;
-    width: 30%;
-    height: auto;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
 }
 
 a:hover
 {
-  color: lightblue;
+  color: #ffffff;
 }
 
 #menuToggle
@@ -308,8 +355,8 @@ a:hover
 #menuToggle input
 {
   display: block;
-  width: 20px;
-  height:100px;
+  width: 45px;
+  height:50px;
   position: absolute;
   top: -7px;
   left: -5px;
@@ -385,8 +432,10 @@ a:hover
  */
 #menu
 {
+  text-align:left;
     position: absolute;
-    width: 200px;
+    width: 235px;
+    height:100px;
     margin: -100px 0 0 -50px;
     padding: 0px 0px 0px 100px;
     padding-top: 96px;
@@ -418,10 +467,10 @@ a:hover
     -moz-border-radius: 5px;
     -ms-border-radius: 5px;
     border-radius: 56px;
-    background: #48A7;
-    padding: 16px;
+    background: #c5deec;
+    padding: 10px;
     font-size: 14px;
     line-height: 1.8;
-    margin: 23px -55px 0px 0px;
+    margin: 23px -5px 0px 0px;
 }
 </style>
