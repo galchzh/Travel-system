@@ -12,11 +12,13 @@ $this->params['breadcrumbs'][] = $this->title;
    <div id="about" class="container-fluid">
   <div class="row">
     <div class="col-sm-8">
-	<h2>About Our System</h2>
-	<h4>Our system support costumers references in diffrend kind of topics</h4> 
-	<p>Let us know about yours problems or concerns and we will take care of it in less then 24 hours.
-	We suggest a few ways of contact, availability and privacy service to our costumers</p>
-		<a href="../site/contact" class="btn btn-default btn-lg">
+  <h1>About Our Travel System</h1>
+  <h3 style="text-align:left;">Our system helps you plan a perfect vacation without moving from your computer</h3> 
+  <p style="text-align:left;">Planning a vacation abroad is a difficult and expensive task - and therefore,<br>
+   especially for you, we have collected all the best tips to help you plan the perfect vacation,<br>
+     from finding a route to choosing the cheapest flight.<br>
+     All of course without moving from your computer</p>
+    <a href="../site/contact" class="btn btn-default btn-lg" id="try">
           <span class="glyphicon glyphicon-envelope"></span> Get in Touch
         </a>
     </div>
@@ -24,5 +26,4 @@ $this->params['breadcrumbs'][] = $this->title;
       <span class="glyphicon glyphicon-signal logo"></span>
     </div>
   </div>
-</div>
 </div>

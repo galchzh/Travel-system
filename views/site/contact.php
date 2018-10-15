@@ -26,13 +26,13 @@ $this->params['breadcrumbs'][] = $this->title;
                 <p><b>First Name:</b> <?=$model->firstname?></p>
                 <p><b>Last Name:</b> <?=$model->lastname?></p>
                 <p><b>E-mail:</b> <?=$model->email?></p>
-                <p><b>Tel:</b> <?=$model->tel?></p>
-                <p><b>Account Num:</b> <?=$model->account?></p>
+                <p><b>Tel. Number:</b> <?=$model->tel?></p>
                 <p><b>Your comments:</b> <?=$model->comments?></p>
             </div>
         </div>
-        <div class="alert alert-success">
-        Thank you for contacting us. We will respond to you as soon as possible.
+        <div class="alert alert-success" style="text-align:center;">
+        Thank you for contacting us. We will respond to you ASAP.<br>
+        Have A Nice Day!  <i class="glyphicon glyphicon-heart" ></i>
         </div>
     </div>
 </div>
@@ -43,10 +43,10 @@ $this->params['breadcrumbs'][] = $this->title;
 <?php else :?>
 <div class="row">
     <div class="col-sm-5"><br><br><br><br>
-      <p>Contact us and we'll get back to you within 24 hours.</p>
+      <p>Contact us and we'll get back to you within 24 hours!</p>
       <p><span class="glyphicon glyphicon-map-marker"></span> Jerusalem , Israel</p>
-      <p><span class="glyphicon glyphicon-phone"></span> +972 547858178</p>
-      <p><span class="glyphicon glyphicon-envelope"></span> sharingcaring@gmail.com</p>
+      <p><span class="glyphicon glyphicon-phone"></span> +972 542611469</p>
+      <p><span class="glyphicon glyphicon-envelope"></span> travelsystem@gmail.com</p>
     </div>
 
 
@@ -77,12 +77,7 @@ $this->params['breadcrumbs'][] = $this->title;
            'inputOptions' => ['autofocus' => 'autofocus', 'class' => 'form-control transparent']
      ])->textInput()->input('tel', ['placeholder' => "Enter Your Tel. Number"])->label(false); ?>
         </div>
-        <div class="col-sm-6 form-group">
-        <?php echo $form->field($model, 'account', [
-           'inputOptions' => ['autofocus' => 'autofocus', 'class' => 'form-control transparent']
-     ])->textInput()->input('account', ['placeholder' => "Enter Your Account Number"])->label(false); ?>
-        </div>
-        <div class="col-sm-6 form-group">
+        <div class="col-sm-12 form-group">
         <?php echo $form->field($model, 'comments', [
            'inputOptions' => ['autofocus' => 'autofocus', 'class' => 'form-control transparent']
      ])->textArea(['rows'=>5, 'placeholder' => "Enter Your Comments"])->label(false); ?>

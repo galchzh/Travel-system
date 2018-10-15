@@ -41,7 +41,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php ActiveForm::end(); ?>
   
 
-    <div class="col-lg-offset-1" style="color:#999;">
+    <!-- <div class="col-lg-offset-1" style="color:#999;">
         If you forgot your password you can <a href="../site/reset">reset it</a>.
-    </div>
+    </div> -->
 </div>

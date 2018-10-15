@@ -12,7 +12,6 @@ use Yii;
  * @property string $lastname
  * @property string $email
  * @property int $tel
- * @property int $account
  */
 class Feedback extends \yii\db\ActiveRecord
 {
@@ -30,7 +29,7 @@ class Feedback extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['tel', 'account'], 'integer'],
+            [['tel'], 'integer'],
             [['firstname', 'lastname', 'email','comments'], 'string', 'max' => 255],
         ];
     }
@@ -45,8 +44,7 @@ class Feedback extends \yii\db\ActiveRecord
             'firstname' => 'First Name',
             'lastname' => 'Last Name',
             'email' => 'E-mail',
-            'tel' => 'Tel',
-            'account' => 'Account',
+            'tel' => 'Tel. Number',
             'comments' => 'Comments',
         ];
     }

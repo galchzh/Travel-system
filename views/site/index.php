@@ -132,11 +132,13 @@ AppAsset::register($this);
 <div id="about" class="container-fluid">
   <div class="row">
     <div class="col-sm-8">
-  <h2>About Our System</h2>
-  <h4>Our system support costumers references in diffrend kind of topics</h4> 
-  <p>Let us know about yours problems or concerns and we will take care of it in less then 24 hours.
-  We suggest a few ways of contact, availability and privacy service to our costumers</p>
-    <a href="#contact" class="btn btn-default btn-lg" id="try">
+  <h1>About Our Travel System</h1>
+  <h3 style="text-align:left;">Our system helps you plan a perfect vacation without moving from your computer</h3> 
+  <p style="text-align:left;">Planning a vacation abroad is a difficult and expensive task - and therefore,<br>
+   especially for you, we have collected all the best tips to help you plan the perfect vacation,<br>
+     from finding a route to choosing the cheapest flight.<br>
+     All of course without moving from your computer</p>
+    <a href="../web/index.php/site/contact" class="btn btn-default btn-lg" id="try">
           <span class="glyphicon glyphicon-envelope"></span> Get in Touch
         </a>
     </div>
@@ -219,13 +221,13 @@ AppAsset::register($this);
   <!-- Wrapper for slides -->
   <div class="carousel-inner" role="listbox" style="background-color: #c5deec; border-radius: 25px;">
     <div class="item active">
-    <h4>"This system is the best."<br><span style="font-style:normal;">David Cohen, Mechanical engineering student </span></h4>
+    <h4>"This system helped me plan the BEST vacation ever!."<br><span style="font-style:normal;">Peter Pan, The boy who wouldn't grow up </span></h4>
     </div>
     <div class="item">
-      <h4>"Highly recommended"<br><span style="font-style:normal;">Noa Bar, Industrial engineering student</span></h4>
+      <h4>"Highly recommended! Great travel system"<br><span style="font-style:normal;">Gal Gadot, Wonder Woman</span></h4>
     </div>
     <div class="item">
-      <h4>"Fast, Easy, User-Friendly"<br><span style="font-style:normal;">Tal Itzhak ,Construction engineering student</span></h4>
+      <h4>"Fast, Easy, User-Friendly"<br><span style="font-style:normal;">Vladimir Putin, President of Russia</span></h4>
     </div>
   </div>
 
@@ -326,19 +328,20 @@ $(document).ready(function(){
 a:link, a:visited, a
 {
   text-decoration: none;
-   color: #232323;
+   color: black;
     
   transition: color 0.3s ease;
 }
+
 #recommended
 {
  width: 55%;
  float:left;
 }
 
-a:hover
+a:hover, .btn-black:hover
 {
-  color: #ffffff;
+  color: white;
 }
 
 #menuToggle
@@ -468,9 +471,14 @@ a:hover
     -ms-border-radius: 5px;
     border-radius: 56px;
     background: #c5deec;
-    padding: 10px;
-    font-size: 14px;
+    padding: 5px;
     line-height: 1.8;
-    margin: 23px -5px 0px 0px;
+    margin: -5px -5px 0px 0px;
+    padding-top: 30px;
+    padding-left:25px;
+    margin-left: 15px;
+    width: 500px;
+    height: 280px;
+    font-size: 18px;
 }
 </style>

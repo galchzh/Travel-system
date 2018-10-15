@@ -18,7 +18,6 @@ class m181006_152704_create_feedback_table extends Migration
             'lastname' => $this->string(),
             'email' => $this->string(),
             'tel' => $this->integer(),
-            'account' => $this->integer(),
             'comments' => $this->text(),
         ]);
     }
