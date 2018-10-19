@@ -26,33 +26,7 @@ class m180917_150444_create_user_table extends Migration
        ]);
 
        
-       $this->addForeignKey(
-        'fk-product-author_id',
-        'article',
-        'author_id',
-        'user',
-        'id'
-    );
-    $this->addForeignKey(
-        'fk-product-editor_id',
-        'article',
-        'editor_id',
-        'user',
-        'id'
-    );
-    $this->addForeignKey(
-        'fk-product-created_by',
-        'article',
-        'created_by',
-        'user',
-        'id'
-    );
-    $this->addForeignKey(
-        'fk-product-updated_by',
-        'article',
-        'updated_by',
-        'user',
-        'id' );
+      
 
     }
 
@@ -63,21 +37,6 @@ class m180917_150444_create_user_table extends Migration
     {
         $this->dropTable('user');
 
-        $this->dropForeignKey(
-            'fk-product-author_id',
-            'user'
-        );
-        $this->dropForeignKey(
-            'fk-product-editor_id',
-            'user'
-        ); 
-        $this->dropForeignKey(
-            'fk-product-created_by',
-            'user'
-        ); 
-        $this->dropForeignKey(
-            'fk-product-updated_by',
-            'user'
-        ); 
+       
     } 
 }

@@ -72,7 +72,7 @@ class Article extends \yii\db\ActiveRecord
             [['body'], 'required'],
             [['tagNames'],'safe'],
             [['rate','sum'],'double'],
-            [['rating_id', 'author_id', 'editor_id', 'category_id', 'count'], 'integer'],
+            [[ 'author_id', 'editor_id', 'category_id', 'count'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
             [['title', 'description','status'], 'string', 'max' => 255],
         

@@ -28,7 +28,7 @@ class ArticleController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['create', 'update'],
+                'only' => ['create', 'update', 'delete'],
                 'rules' => [
                     [
                         'allow' => true,
@@ -42,6 +42,11 @@ class ArticleController extends Controller
                         'roleParams' => function() {
                             return ['article' => Article::findOne(['id' => Yii::$app->request->get('id')])];
                         },                      
+                    ],
+                    [
+                        'allow' => true,
+                        'actions' => ['delete'],
+                        'roles' => ['admin'],
                     ],                   
                 ],
             ],
@@ -108,6 +113,13 @@ class ArticleController extends Controller
            return $this->redirect(['view','id' => $model->id]);
         }
 
+        $searchModel = new ArticleSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->query->andWhere('article.status = 2');
+        $dataProvider->query->andWhere(['!=','article.id',$id]);
+        $model1 = Article::findOne($id);
+        $dataProvider->query->andFilterWhere(['category_id' => $model1->category_id]);
+
         $tags = '';
         foreach($tagModels as $tag)
         {
@@ -119,7 +131,8 @@ class ArticleController extends Controller
 
         return $this->render('view', [
             'model' => $this->findModel($id),
-            'tags' => $tags
+            'tags' => $tags,
+            'dataProvider' => $dataProvider,
         
         ]);
     }

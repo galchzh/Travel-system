@@ -13,6 +13,7 @@ use kartik\rating\StarRating;
 use yii\web\JsExpression;
 use app\models\User;
 use app\models\Tag;
+use yii\grid\GridView;
 
 
 
@@ -54,16 +55,17 @@ $this->params['breadcrumbs'][] = $this->title;
                      margin: 5px ;">
           
             <div class="panel-body">
-                <h1> <?=$model->title?></h1>
+            <h1> <?=$model->title?></h1>
                
- 
-                <p>Created At: <?=$model->created_at?></p>
+               <?php $createdAt = $model->created_at ?>
+              <?php $cleantime=substr($createdAt,0,-3)?>
+               <p> <?=$cleantime ?></p>
                 <p style="color:gray"> <?=$model->description?></p>
                 <br>
                 <br>
                 <p style="margin: 5px 18px 9px; padding:8px; font-size: 14px; line-height: 1.8;"> <?=$model->body?></p>
                 
-                <p class="author">Created By: -<?=$model->createdBy->name?>-</p>
+                <p class="author"> -<?=$model->createdBy->name?>-</p>
 <br><br>
                 
 
@@ -162,13 +164,36 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
        
         <?php endif;?>
- 
+    <div class = "related"><br>
+        <h2>Related Articles - Same Category: </h2><br>
+<?= GridView::widget([
+        'dataProvider' => $dataProvider,
+        'layout' => '{items}{pager}',
+	  'columns' => [
+		['class' => 'yii\grid\SerialColumn',
+	    'headerOptions' => ['style' => 'width:5%; text-align:center'],],
+		[ 'attribute' => 'title',
+         'headerOptions' => ['style' => ' text-align:center'],],
+        [ 'attribute' => 'description',
+         'headerOptions' => ['style' => ' text-align:center'],],
+     
+        ['class' => 'yii\grid\ActionColumn',
+            'contentOptions' => ['style' => 'width:10%;'],
+            'template' => '{view}',               
+        ]]]); ?>
+ </div>
         
     </div>
 </div>
 
 
   <style>
+  .related
+  {
+      text-align:center;
+      margin-left: 5%;
+      margin-right: 5%;
+  }
  .half {
     position:relative;
 }

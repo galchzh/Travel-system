@@ -46,28 +46,7 @@ $config = [
             ],
              
         ],
-        'vote' => [
-          'class' => hauntd\vote\Module::class,
-            'guestTimeLimit' => 3600,
-            'entities' => [
-              // Entity -> Settings
-              'itemVote' => app\models\Item::class, // your model
-              'itemVoteGuests' => [
-                  'modelName' => app\models\Item::class, // your model
-                  'allowGuests' => true,
-                  'allowSelfVote' => false,
-                  'entityAuthorAttribute' => 'user_id',
-              ],
-              'itemLike' => [
-                  'modelName' => app\models\Item::class, // your model
-                  'type' => hauntd\vote\Module::TYPE_TOGGLE, // like/favorite button
-              ],
-              'itemFavorite' => [
-                  'modelName' => app\models\Item::class, // your model
-                  'type' => hauntd\vote\Module::TYPE_TOGGLE, // like/favorite button
-              ],
-          ],
-        ],
+        
       ],
     'components' => [
         'request' => [

@@ -34,9 +34,22 @@ use dosamigos\selectize\SelectizeTextInput;
     <?= $form->field($model, 'editor_id')->dropDownList(
         ArrayHelper::map(User::find()->asArray()->all(), 'id', 'name')    ) ?>
 
-
+    <?php if (\Yii::$app->user->can('updateStatus')) 
+    { ?>       
+<div class="row">
+<div class="col-md-10">
+    <?php }?>
      <?= $form->field($model, 'category_id')->dropDownList(
         ArrayHelper::map(Category::find()->asArray()->all(), 'id', 'name')  ) ?>
+
+            <?php if (\Yii::$app->user->can('updateStatus')): ?>
+        </div> <div class="col-md-2">
+        <span class="input-group-btn">
+    <a href="../category/create" id="stat" class="btn btn-primary" style="margin-top:30px; margin-left:15px; border-radius:10px;">Add Category</a>
+</span>
+</div></div>
+<?php endif; ?>
+
 
     <?= $form->field($model, 'tagNames')->widget(SelectizeTextInput::className(), [
     // calls an action that returns a JSON object with matched tags
@@ -51,7 +64,7 @@ use dosamigos\selectize\SelectizeTextInput;
     ],
 ])->hint('Use commas to separate tags') ?>
 
-
+</div>
     <?php // $form->field($model, 'created_at')->textInput() ?>
 
     <?php // $form->field($model, 'updated_at')->textInput() ?>

@@ -41,6 +41,7 @@ AppAsset::register($this);
    <?php echo Nav::widget([
         'options' => ['class' => 'nav navbar-nav'],
         'items' => [
+            ['label' => 'Users', 'url' => ['../index.php/user'],  'visible' => Yii::$app->user->can('manageUsers'),],
             ['label' => 'Home', 'url' => ['../index.php']],           
             ['label' => 'About', 'url' => ['../index.php/site/about']],
             ['label' => 'Contact', 'url' => ['../index.php/site/contact']],
@@ -48,8 +49,10 @@ AppAsset::register($this);
             ['label' => 'Plan', 'url' => ['../index.php/site/plan']],
             ['label' => '7 Wonders', 'url' => ['../index.php/site/wonders']],
             ['label' => '3 Popular', 'url' => ['../index.php/site/popular']],
-        ],
+
+           ],
     ]);
+  
     echo Nav::widget([
         'options' => ['class' => 'nav navbar-nav navbar-right '],
         'items' => [

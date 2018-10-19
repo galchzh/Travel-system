@@ -69,17 +69,22 @@ AppAsset::register($this);
   </nav>
 </div>
     <div class="collapse navbar-collapse" id="myNavbar">
+    <?php   echo Nav::widget([
+        'options' => ['class' => 'nav navbar-nav '],
+        'items' => [
+          ['label' => 'Users', 'url' => ['../index.php/user'],  'visible' => Yii::$app->user->can('manageUsers'),],
+        ],
+      ]);
+?>
       <ul class="nav navbar-nav">
         <li><a href="../web/index.php/site/about">About</a></li>
         <li><a href="../web/index.php/site/contact">Contact</a></li>
         <li><a href="../web/index.php/article">Articles</a></li>    
         <li><a href="../web/index.php/site/plan">Plan</a></li>
         <li><a href="../web/index.php/site/wonders">7 Wonders</a></li>
-        <li><a href="../web/index.php/site/popular">3 Popular</a></li>
-    
+        <li><a href="../web/index.php/site/popular">3 Popular</a></li>       
       </ul>
     
-  
 
     <?php   echo Nav::widget([
         'options' => ['class' => 'nav navbar-nav navbar-right '],
@@ -277,6 +282,10 @@ $(document).ready(function(){
 </script>
 
 <style>
+#myNavbar
+{
+  padding-left:13%;
+}
 .row {
     width: 100%; /* Try setting this to 400px or something */
     display: table;
