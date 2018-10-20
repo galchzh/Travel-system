@@ -37,6 +37,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         <?php  if (\Yii::$app->user->can('author')): ?>
         <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+<?php endif;  if (\Yii::$app->user->can('admin')): ?>
         <?= Html::a('Delete', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
@@ -247,12 +248,6 @@ $this->params['breadcrumbs'][] = $this->title;
 }
       </style>
 
-   
-    
-
-  
-
-   
 
 
   <?php echo FacebookPlugin::widget([]);?>
@@ -261,8 +256,8 @@ $this->params['breadcrumbs'][] = $this->title;
 //echo FacebookPlugin::widget(['type'=>FacebookPlugin::SAVE, 'settings' => ['size'=>'small', 'uri'=>Url::current([], true)]]);
   echo FacebookPlugin::widget(['type'=>FacebookPlugin::SHARE, 'settings' => ['size'=>'small', 'layout'=>'button_count', 'mobile_iframe'=>'false']]);
  // echo FacebookPlugin::widget(['type'=>FacebookPlugin::FOLLOW, 'settings' => ['href'=>'http://facebook.com/<page_name>']]);
-
- echo TwitterPlugin::widget([]);
+?> <br> <br>
+<?php echo TwitterPlugin::widget([]);
 // echo TwitterPlugin::widget(['type'=>TwitterPlugin::FOLLOW, 'settings' => ['size'=>'large']]);
 // echo TwitterPlugin::widget(['type'=>TwitterPlugin::HASHTAG, 'hashTag'=>'Travel', 'settings' => ['size'=>'small']]);
 

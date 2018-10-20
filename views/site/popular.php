@@ -8,7 +8,7 @@ $this->title = '3 World popular places';
 
 <body class="pop">
     <div class="try">
-<h1 id="hh1"> 3 World places to visit this new year</h1>
+<h1 id="hh1"> 3 World popular places to visit this new year</h1>
 <div class="wrapperr">
   <div class="containerr" id="c0">
     <div class="image" id="i0">
@@ -378,7 +378,7 @@ $this->title = '3 World popular places';
   color: #111;
   position: absolute;
   top: 0%;
-  left: 30%;
+  left: 20%;
   letter-spacing: 2px;
 }
 

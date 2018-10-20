@@ -41,8 +41,9 @@ AppAsset::register($this);
    <?php echo Nav::widget([
         'options' => ['class' => 'nav navbar-nav'],
         'items' => [
+            ['label' => 'Home', 'url' => ['../index.php']], 
             ['label' => 'Users', 'url' => ['../index.php/user'],  'visible' => Yii::$app->user->can('manageUsers'),],
-            ['label' => 'Home', 'url' => ['../index.php']],           
+            ['label' => 'Category', 'url' => ['../index.php/category'],  'visible' => Yii::$app->user->can('editor') & !Yii::$app->user->can('admin'),],          
             ['label' => 'About', 'url' => ['../index.php/site/about']],
             ['label' => 'Contact', 'url' => ['../index.php/site/contact']],
             ['label' => 'Articles', 'url' => ['../index.php/article/']],

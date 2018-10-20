@@ -107,11 +107,19 @@ class ArticleController extends Controller
 
         $model->count = $model->count+1;
         if ($model->load(Yii::$app->request->post()) && $model->save(false)) {
+            if ($model->rate == 0)
+            {
+                Yii::$app->session->setFlash('RateSubmitted');
+                $model->save(false);
+                return $this->redirect(['view','id' => $model->id]);
+            }
+            else {
             Yii::$app->session->setFlash('RateSubmitted');
            $model->sum = $model->sum+$model->rate;
            $model->save(false);
            return $this->redirect(['view','id' => $model->id]);
         }
+    }
 
         $searchModel = new ArticleSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);

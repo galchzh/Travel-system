@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
     <?php echo $this->render('_search', ['model' => $searchModel]); ?>
-    <?php if (\Yii::$app->user->can('author')): ?>
+    <?php if (\Yii::$app->user->can('createArticle')): ?>
     <p>
         <?= Html::a('Create Article', ['create'], ['class' => 'btn btn-success']) ?>    
     </p>
@@ -77,28 +77,45 @@ $this->params['breadcrumbs'][] = $this->title;
             //'updated_at',
             //'created_by',
             //'updated_by',
-
-            ['class' => 'yii\grid\ActionColumn'],
+            ['class' => 'yii\grid\ActionColumn', 
+            'template' => '{view}{update}{delete}',
+            'visible' => (Yii::$app->user->can("admin")),
+           
         ],
-        
 
-        
-    ]);  ?>
+           ['class' => 'yii\grid\ActionColumn',
+               'template' => '{view}{update}',
+            'visible' => (Yii::$app->user->can("author") & !(Yii::$app->user->can("admin"))),
+            
+
+        ],
+        ['class' => 'yii\grid\ActionColumn',
+               'template' => '{view}',
+            'visible' => (!Yii::$app->user->can("author")),
+           
+
+        ],
+
+       ],
+
+    ]); ?>
+   
 
     <style>
-    .status2
-    {
-        background-color: #ccddff !important;
-        color:	#003399 !important;
-    }
+    
     .status1
     {
         background-color: #e6ffe6 !important;
         color: green !important;
     }
+    .status2
+    {
+        background-color: #d9edf7 !important;
+        color:	#003399 !important;
+    }
     .status3
     {
-        background-color: #ffe6cc !important;
+        background-color: #fcf8e3 !important;
         color: orange !important;
     }
 </style>
