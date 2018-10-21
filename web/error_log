@@ -1,0 +1,5 @@
+[19-Oct-2018 12:25:11 UTC] PHP Fatal error:  Uncaught Error: Class 'kartik\icons\Icon' not found in /home/galch/public_html/project/config/web.php:110
+Stack trace:
+#0 /home/galch/public_html/project/web/index.php(10): require()
+#1 {main}
+  thrown in /home/galch/public_html/project/config/web.php on line 110

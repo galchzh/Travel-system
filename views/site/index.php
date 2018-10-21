@@ -157,11 +157,12 @@ AppAsset::register($this);
   <section id="ht-kb-articles-widget-2" class="widget hkb_widget_articles" style="float:right;">
     <h3 class="widget__title" style="margin:5%; margin-top:-2px; color:black;">Popular Articles</h3>
     <ul>
-      <li class="hkb-widget-article__format-standard"><a class="hkb-widget__entry-title" href="https://demo.herothemes.com/knowall/knowledge-base/how-to-create-an-account/">How to Create an Account</a></li>
-      <li class="hkb-widget-article__format-standard"><a class="hkb-widget__entry-title" href="https://demo.herothemes.com/knowall/knowledge-base/how-does-the-30-day-money-back-guarantee-work/">How Does the 30 Day Money Back Guarantee Work?</a></li>
-      <li class="hkb-widget-article__format-standard"><a class="hkb-widget__entry-title" href="https://demo.herothemes.com/knowall/knowledge-base/how-our-pricing-plans-work/">How Our Pricing Plans Work</a></li>
-      <li class="hkb-widget-article__format-standard"><a class="hkb-widget__entry-title" href="https://demo.herothemes.com/knowall/knowledge-base/how-can-i-edit-my-already-existing-page/">How Can I Edit My Already Existing Page?</a></li>
-      <li class="hkb-widget-article__format-standard"><a class="hkb-widget__entry-title" href="https://demo.herothemes.com/knowall/knowledge-base/what-are-the-api-limits/">What Are the API Limits?</a></li></ul>
+      <li class="hkb-widget-article__format-standard"><a class="hkb-widget__entry-title" href="../web/index.php/article/view?id=3">The Best Places to Travel in November</a></li>
+      <li class="hkb-widget-article__format-standard"><a class="hkb-widget__entry-title" href="../web/index.php/article/view?id=4">The Caribbean Is Making a Comeback</a></li>
+      <li class="hkb-widget-article__format-standard"><a class="hkb-widget__entry-title" href="../web/index.php/article/view?id=7">Love is (literally) in the air</a></li>
+      <li class="hkb-widget-article__format-standard"><a class="hkb-widget__entry-title" href="../web/index.php/article/view?id=9">Best Luggage Trackers for Locating Lost Bags</a></li>
+	  <li class="hkb-widget-article__format-standard"><a class="hkb-widget__entry-title" href="../web/index.php/article/view?id=5">The World's Longest Flight</a></li>
+	  </ul>
   </section> 
       </div>
 </div>

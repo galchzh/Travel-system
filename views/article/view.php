@@ -64,7 +64,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <p style="color:gray"> <?=$model->description?></p>
                 <br>
                 <br>
-                <p style="margin: 5px 18px 9px; padding:8px; font-size: 14px; line-height: 1.8;"> <?=$model->body?></p>
+                <p style="margin: 5px 18px 9px; padding:8px; font-size: 14px; line-height: 1.8; format: paragrphs;"> <?=$model->body?></p>
                 
                 <p class="author"> -<?=$model->createdBy->name?>-</p>
 <br><br>

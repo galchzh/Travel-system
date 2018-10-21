@@ -47,7 +47,16 @@ $this->params['breadcrumbs'][] = $this->title;
            // 'id',
             'title',
             'description',
-            'body:ntext',
+            [
+                'attribute'=>'body',
+                'value' => function($model) {
+					return ($newBody = substr($model->body,0,250).'...' ); 
+				},
+				'format' => 'paragraphs',
+				'contentOptions' => [ 'style'=>' overflow: auto; word-wrap: break-word;' ],
+				
+				
+            ],
             //'author_id',
             [
                 'attribute'=>'author_id',
