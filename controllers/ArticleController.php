@@ -212,16 +212,7 @@ class ArticleController extends Controller
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
-    public function actionSearcharticle()
-    {
-        $term =  $_GET['searchterm']   ;
-        $article = Yii::$app->db->createCommand("SELECT * FROM article WHERE (article.title LIKE '%".$term."%'")->queryAll();
-            return $this->render('search', [
-            'articles' => $article,
-            'term' => $term
-        ]);
-    }
-
+    
    
 
     

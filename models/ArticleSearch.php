@@ -32,7 +32,6 @@ class ArticleSearch extends Article
      */
     public function scenarios()
     {
-        // bypass scenarios() implementation in the parent class
         return Model::scenarios();
     }
 
@@ -47,7 +46,6 @@ class ArticleSearch extends Article
     {
         $query = Article::find();
 
-        // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -56,40 +54,43 @@ class ArticleSearch extends Article
         $this->load($params);
 
         if (!$this->validate()) {
-            // uncomment the following line if you do not want to return any records when validation fails
-            // $query->where('0=1');
             return $dataProvider;
         }
 
-        // grid filtering conditions
-        $query->andFilterWhere([
-            'id' => $this->id,
-           // 'author_id' => $this->author_id,
-           // 'editor_id' => $this->editor_id,
-           // 'category_id' => $this->category_id,
-          //  'created_at' => $this->created_at,
-           // 'updated_at' => $this->updated_at,
-          //  'created_by' => $this->created_by,
-          //  'updated_by' => $this->updated_by,
-            
-        ]);
+		
+		 $query->andFilterWhere([ 
+            'id' => $this->id, 
+            'author_id' => $this->author_id,
+            'editor_id' => $this->editor_id,
+            'category_id' => $this->category_id,
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,
+            'created_by' => $this->created_by,
+            'updated_by' => $this->updated_by,
+            'status' => $this->status,
 
-        $query->andFilterWhere([
-            'or',
-        ['like', 'title' , $this->globalSearch],
-        ['like', 'description' , $this->globalSearch],
-        ['like', 'body' , $this->globalSearch],
-        ['like', 'status' , !\Yii::$app->user->can('author') ? 2: $this->globalSearch,],
+        ]);
+          
+        $query->andFilterWhere(['like', 'title', $this->title])
+            ->andFilterWhere(['like', 'description', $this->description])
+            ->andFilterWhere(['like', 'body', $this->body]);
+   
+
+   
+        $query->orFilterWhere(['like', 'title', $this->globalSearch])
+        ->orFilterWhere(['like', 'description', $this->globalSearch])
+        ->orFilterWhere(['like', 'body', $this->globalSearch])
+        ->orFilterWhere(['like', 'category_id', $this->globalSearch]);
+      
+		
+		 $query->andFilterWhere([  'or',
+		  ['like', 'status' , !\Yii::$app->user->can('author') ? 2: $this->globalSearch,],
         ['like', 'status' , \Yii::$app->user->can('author') ? 2: $this->globalSearch,],
         ['like', 'status' , \Yii::$app->user->can('author') ? 3: $this->globalSearch,],
         ['like', 'status' , \Yii::$app->user->can('editor') ? 1: $this->globalSearch,],
-        ['like', 'category_id' , $this->globalSearch],
-        ['like', 'editor_id' , $this->globalSearch],
-        ['like', 'created_at' , $this->globalSearch],
-        ['like', 'updated_at' , $this->globalSearch],
-        ['like', 'created_by' , $this->globalSearch],
-        ['like', 'updated_by' , $this->globalSearch],
-        ]);
+		]);
+		
+		
 
         //Add tags condition
         

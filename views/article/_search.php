@@ -25,7 +25,7 @@ use yii\data\SqlDataProvider;
     $a=ArrayHelper::map(article::find()->all(),'id','title');
     $b=ArrayHelper::map(article::find()->all(),'id','body');
     $c=ArrayHelper::map(article::find()->all(),'id','description');
-    $x= ArrayHelper::merge ( $a, $b, $c );
+    $x= ArrayHelper::merge( $a, $b, $c );
     
     echo $form->field($model, 'globalSearch')->widget(TypeaheadBasic::classname(),
         [

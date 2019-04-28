@@ -142,7 +142,7 @@ AppAsset::register($this);
   <p style="text-align:left;">Planning a vacation abroad is a difficult and expensive task - and therefore,<br>
    especially for you, we have collected all the best tips to help you plan the perfect vacation,<br>
      from finding a route to choosing the cheapest flight.<br>
-     All of course without moving from your computer</p>
+     All, of course, without moving from your computer!</p>
     <a href="../web/index.php/site/contact" class="btn btn-default btn-lg" id="try">
           <span class="glyphicon glyphicon-envelope"></span> Get in Touch
         </a>

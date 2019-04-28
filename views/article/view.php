@@ -61,10 +61,38 @@ $this->params['breadcrumbs'][] = $this->title;
                <?php $createdAt = $model->created_at ?>
               <?php $cleantime=substr($createdAt,0,-3)?>
                <p> <?=$cleantime ?></p>
-                <p style="color:gray"> <?=$model->description?></p>
+			   <p>
+			    <?= DetailView::widget([
+					'model' => $model, 
+					 'options' => ['class' => ''],    
+					'attributes' => [
+						[
+							'attribute' =>'',
+							'format' => 'paragraphs',
+							'value' => $model->description,
+							'contentOptions' => [ 'style'=>' color:gray;' ],
+						],  
+					],
+					]) ?>
+
+               </p>
                 <br>
                 <br>
-                <p style="margin: 5px 18px 9px; padding:8px; font-size: 14px; line-height: 1.8; format: paragrphs;"> <?=$model->body?></p>
+				<p>
+				  <?= DetailView::widget([
+					'model' => $model, 
+					 'options' => ['class' => ''],    
+					'attributes' => [
+						[
+							'attribute' =>'',
+							'format' => 'paragraphs',
+							'value' => $model->body,
+							'contentOptions' => [ 'style'=>' overflow: auto; word-wrap: break-word; margin: 5px 18px 9px; padding:8px; font-size: 14px; line-height: 1.8;' ],
+						],  
+					],
+					]) ?>
+						</p>	
+							
                 
                 <p class="author"> -<?=$model->createdBy->name?>-</p>
 <br><br>
